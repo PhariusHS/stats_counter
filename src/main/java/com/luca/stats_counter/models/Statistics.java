@@ -30,6 +30,18 @@ public class Statistics {
     @ManyToOne
     private Match match;
 
+    private Integer score;
+    private Integer penaltiesConceded;
+    private Integer handlingErrors;
+    private Integer winnedScrums;
+    private Integer losedScrums;
+    private Integer winnedLines;
+    private Integer losedLines;
+    private Integer fiftyTwentytwo;
+    private Integer trys;
+    private Integer conversions;
+    private Integer penaltieGoal;
+    private Integer failedPenaltieGoal;
 
 
 }
