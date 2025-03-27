@@ -8,8 +8,6 @@ public class StatsCounterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StatsCounterApplication.class, args);
-
-
 	}
 
 }

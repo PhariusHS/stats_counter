@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.luca.stats_counter.Command;
+import com.luca.stats_counter.Query;
 import com.luca.stats_counter.models.Match;
 import com.luca.stats_counter.repositories.MatchRepository;
 
 @Service
-public class GetAllMatchesService implements Command<Void, List<Match>> {
+public class GetAllMatchesService implements Query<Void, List<Match>> {
 
     private final MatchRepository matchRepository;
     public GetAllMatchesService(MatchRepository matchRepository){
