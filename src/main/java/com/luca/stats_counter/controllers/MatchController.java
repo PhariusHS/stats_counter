@@ -2,14 +2,17 @@ package com.luca.stats_counter.controllers;
 
 import java.util.List;
 
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luca.stats_counter.models.Match;
+import com.luca.stats_counter.models.MatchDTO;
 import com.luca.stats_counter.services.matchServices.CreateMatchService;
 import com.luca.stats_counter.services.matchServices.DeleteMatchService;
 import com.luca.stats_counter.services.matchServices.GetAllMatchesService;
@@ -39,8 +42,8 @@ public class MatchController {
     }
 
     @PostMapping
-    public ResponseEntity<Match> createMatch(@RequestBody Match match) {
-     return createMatchService.execute(match);
+    public ResponseEntity<MatchDTO> createMatch(@RequestBody Match match, @RequestParam Long localTeamId, @RequestParam Long visitantTeamId) {
+     return createMatchService.execute(match, localTeamId, visitantTeamId);
     }
     
     @DeleteMapping("/{id}")

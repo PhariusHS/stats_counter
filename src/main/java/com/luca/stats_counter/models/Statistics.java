@@ -1,5 +1,8 @@
 package com.luca.stats_counter.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @Getter
@@ -22,11 +24,13 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference(value = "team_statistics_reference")
     @ManyToOne
     private Team team;
 
     private Boolean isLocal;
 
+    @JsonBackReference(value = "match_statistics_reference")
     @ManyToOne
     private Match match;
 
@@ -42,6 +46,5 @@ public class Statistics {
     private Integer conversions;
     private Integer penaltieGoal;
     private Integer failedPenaltieGoal;
-
 
 }
