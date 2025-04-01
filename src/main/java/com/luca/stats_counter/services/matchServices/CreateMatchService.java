@@ -20,42 +20,42 @@ import com.luca.stats_counter.repositories.TeamRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class CreateMatchService implements RelationalCommand<Match, MatchDTO, Long>  {
-
+public class CreateMatchService implements RelationalCommand<Match, MatchDTO, Long> {
 
     private final MatchRepository matchRepository;
     private final TeamRepository teamRepository;
     private final StatisticsRepository statisticsRepository;
-    public CreateMatchService(MatchRepository matchRepository, StatisticsRepository statisticsRepository, TeamRepository teamRepository){
+
+    public CreateMatchService(MatchRepository matchRepository, StatisticsRepository statisticsRepository,
+            TeamRepository teamRepository) {
         this.matchRepository = matchRepository;
         this.statisticsRepository = statisticsRepository;
         this.teamRepository = teamRepository;
     } // Immutable DI;
 
     @Override
-    public ResponseEntity<MatchDTO> execute(Match match,  Long localTeamId, Long visitantTeamId) {
+    public ResponseEntity<MatchDTO> execute(Match match, Long localTeamId, Long visitantTeamId) {
 
-      
         Optional<Team> foundedLocalTeam = teamRepository.findById(localTeamId);
         Optional<Team> foundedVisitantTeam = teamRepository.findById(visitantTeamId);
 
-        if(!foundedLocalTeam.isPresent()){
+        if (!foundedLocalTeam.isPresent()) {
             throw new EntityNotFoundException();
         }
-        if(!foundedVisitantTeam.isPresent()){
+        if (!foundedVisitantTeam.isPresent()) {
             throw new EntityNotFoundException();
-        } //todo handling error
+        } // todo handling error
 
         match.setLocalTeam(foundedLocalTeam.get());
         match.setVisitantTeam(foundedVisitantTeam.get());
         Match savedMatch = matchRepository.save(match);
-        for (int i = 0; i < 2; i++){ // For every match there's two statistics objects, one per team
+        for (int i = 0; i < 2; i++) { // For every match are two statistics objects, one per team
             Statistics stats = new Statistics();
             stats.setMatch(savedMatch);
-            if(i == 1){ // set the local team
+            if (i == 1) { // set the local team
                 stats.setTeam(savedMatch.getLocalTeam());
                 stats.setIsLocal(true);
-            } else { //set the visitant team
+            } else { // set the visitant team
                 stats.setTeam(savedMatch.getVisitantTeam());
                 stats.setIsLocal(false);
             }
@@ -63,5 +63,5 @@ public class CreateMatchService implements RelationalCommand<Match, MatchDTO, Lo
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(new MatchDTO(savedMatch));
     }
-    
+
 }

@@ -43,7 +43,7 @@ public class Match {
     @Transient
     @JsonIgnore
     @JsonManagedReference(value = "match_statistics_reference")
-    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Statistics> matchStatistics;
 
     
