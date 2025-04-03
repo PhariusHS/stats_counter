@@ -29,11 +29,10 @@ public class DeleteMatchService implements Command<Long, Void>{
     public ResponseEntity<Void> execute(Long matchId) {
         Optional<Match> foundedMatch = matchRepository.findById(matchId);
         if(foundedMatch.isPresent()){//Verifies if the match exists
-            List<Statistics> matchStatistics = statisticsRepository.findByMatch(foundedMatch.get());
+            List<Statistics> matchStatistics = statisticsRepository.findByMatch(foundedMatch.get()); // Getting match statistics
             for(Statistics i : matchStatistics){
                 statisticsRepository.deleteById(i.getId());
             } // delete statistics before deleting the Match
-            
             matchRepository.deleteById(matchId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

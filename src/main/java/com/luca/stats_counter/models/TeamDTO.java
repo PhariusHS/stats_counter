@@ -10,6 +10,7 @@ public class TeamDTO {
     private Long id;
     private String name;
     private String location;
+    private List<Statistics> teamStatistics;
     private List<Match> teamMatchesAsLocal;
     private List<Match> teamMatchesAsVisitant;
 
@@ -18,6 +19,7 @@ public class TeamDTO {
         this.id = team.getId();
         this.name = team.getName();
         this.location = team.getLocation();
+        this.teamStatistics = team.getTeamStatistics();
         this.teamMatchesAsLocal = team.getTeamMatchesAsLocal();
         this.teamMatchesAsVisitant = team.getTeamMatchesAsVisitant();
     }

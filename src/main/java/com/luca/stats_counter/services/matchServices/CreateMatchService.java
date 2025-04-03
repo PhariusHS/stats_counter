@@ -1,13 +1,11 @@
 package com.luca.stats_counter.services.matchServices;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.luca.stats_counter.Command;
 import com.luca.stats_counter.RelationalCommand;
 import com.luca.stats_counter.models.Match;
 import com.luca.stats_counter.models.MatchDTO;
@@ -52,10 +50,10 @@ public class CreateMatchService implements RelationalCommand<Match, MatchDTO, Lo
         for (int i = 0; i < 2; i++) { // For every match are two statistics objects, one per team
             Statistics stats = new Statistics();
             stats.setMatch(savedMatch);
-            if (i == 1) { // set the local team
+            if (i == 1) { // set the local team in the statistics object
                 stats.setTeam(savedMatch.getLocalTeam());
                 stats.setIsLocal(true);
-            } else { // set the visitant team
+            } else { // set the visitant team in the statistics object
                 stats.setTeam(savedMatch.getVisitantTeam());
                 stats.setIsLocal(false);
             }

@@ -21,7 +21,6 @@ public class GetAllMatchesService implements Query<Void, List<Match>> {
     @Override
     public ResponseEntity<List<Match>> execute(Void input) {
         List<Match> foundedMatches = matchRepository.findAll();
-
         return ResponseEntity.status(HttpStatus.OK).body(foundedMatches);
     } // If there's no matches just return an empty list
     

@@ -4,7 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luca.stats_counter.models.Statistics;
-import com.luca.stats_counter.services.statisticsServices.GetStatistcsByMatchService;
+import com.luca.stats_counter.services.statisticsServices.GetStatisticsByMatchService;
+import com.luca.stats_counter.services.statisticsServices.GetStatisticsByTeamService;
 
 import java.util.List;
 
@@ -17,19 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/stats")
 public class StatisticsController  {
     
-    private final GetStatistcsByMatchService getStatistcsByMatchService;
+    private final GetStatisticsByMatchService getStatisticsByMatchService;
+    private final GetStatisticsByTeamService getStatisticsByTeamService;
 
-    public StatisticsController(GetStatistcsByMatchService getStatistcsByMatchService){
-        this.getStatistcsByMatchService = getStatistcsByMatchService;
+    public StatisticsController(GetStatisticsByMatchService getStatisticsByMatchService, GetStatisticsByTeamService getStatisticsByTeamService){
+        this.getStatisticsByMatchService = getStatisticsByMatchService;
+        this.getStatisticsByTeamService = getStatisticsByTeamService;
     }
-
-
     @GetMapping("/per-match")
     public ResponseEntity<List<Statistics>> getStatsByMatch(@RequestParam Long matchId) {
-        return getStatistcsByMatchService.execute(matchId);
+        return getStatisticsByMatchService.execute(matchId);
     }
-    
-
-
-
+    @GetMapping("/per-team")
+    public ResponseEntity<List<Statistics>> getStatsByTeam(@RequestParam Long teamId) {
+        return getStatisticsByTeamService.execute(teamId);
+    }
 }

@@ -16,11 +16,11 @@ import com.luca.stats_counter.repositories.StatisticsRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class GetStatistcsByMatchService implements Query<Long, List<Statistics>> {
+public class GetStatisticsByMatchService implements Query<Long, List<Statistics>> {
 
     private final StatisticsRepository statisticsRepository;
     private final MatchRepository matchRepository;
-    public GetStatistcsByMatchService(StatisticsRepository statisticsRepository, MatchRepository matchRepository){
+    public GetStatisticsByMatchService(StatisticsRepository statisticsRepository, MatchRepository matchRepository){
         this.statisticsRepository = statisticsRepository;
         this.matchRepository = matchRepository;
     }
