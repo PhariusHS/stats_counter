@@ -17,6 +17,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,8 +37,11 @@ public class Match {
     @GeneratedValue( strategy = GenerationType.IDENTITY) 
     private Long id;
 
+    @NotNull(message = "Date is necessary")
     private LocalDate localDate;
 
+    @NotNull(message = "Round is necessary")
+    @Positive(message = "round can't be negative")
     private Long round;
 
     @Transient
