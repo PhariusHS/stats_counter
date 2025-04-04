@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.luca.stats_counter.Query;
 import com.luca.stats_counter.models.Match;
@@ -12,6 +13,7 @@ import com.luca.stats_counter.repositories.MatchRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
+@Service
 public class GetMatchByIdService implements Query<Long, MatchDTO>{
 
     private final MatchRepository matchRepository;
